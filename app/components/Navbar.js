@@ -5,21 +5,21 @@ export default function Navbar() {
   return (
     <div className="navbar shadow-md bg-base-100 ">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost"> Parth Khatke</Link>
+        <Link href="https://www.linkedin.com/in/parthkhatke/" className="btn btn-ghost text-xl"> Parth Khatke</Link>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" className="text-xl">Home</Link>
           </li>
           <li>
-            <Link href="/about" >About</Link>
+            <Link href="/about" className="text-xl">About</Link>
           </li>
           <li>
-            <Link href="/projects">Projects</Link>
+            <Link href="/project" className="text-xl   ">Projects</Link>
           </li>
           <li>
-            <Link href="/resume">Resume</Link>
+            <Link href="https://drive.google.com/file/d/1Gnhbe6iz2IFZmp4PCU6p7C098VuWzq1Y/view?usp=drivesdk" className="text-xl">Resume</Link>
           </li>
         </ul>
       </div>

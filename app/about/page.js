@@ -1,28 +1,34 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
-const data = await fetch('http://localhost:1337/api/about?populate=*', { cache: 'no-store' });
+const data = await fetch("http://localhost:1337/api/about?populate[blocks][populate]=*", { cache: 'no-store' });
 const res = await data.json();
-
 const AboutPage = () => {
   const content = res?.data ?? null;
-
+  
   if (!content) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-slate-600">
+      <div className="min-h-screen flex items-center justify-center0">
         Content not found.
       </div>
     );
   }
-
+  
   const { title, blocks } = content;
+  const mediaBlock = blocks?.find(b => b.__component === 'shared.media');
 
   return (
-    <main className="min-h-screen py-12 bg-amber-100 ">
-      <div className="max-w-4xl mx-auto px-6">
-        <h1 className="text-4xl font-extrabold text-amber-800 mb-6">{title}</h1>
-
-        <section className="grid gap-6 prose prose-lg prose-indigo text-black bg-amber-200 rounded-lg p-6 shadow-md">
+    <div className="hero  ">
+      <div className="hero-content flex-col lg:flex-row">
+   
+          <img
+            src={`http://localhost:1337${mediaBlock.file.url}`}
+            alt={mediaBlock.file.alternativeText || 'Media'}
+            className="max-w-sm rounded-lg shadow-2xl"
+          />
+  
+        <div>
+        <h1 className="text-5xl font-bold">{title}</h1>
           {blocks &&
             blocks.map((block) => {
               if (block.__component === 'shared.rich-text') {
@@ -34,10 +40,25 @@ const AboutPage = () => {
               }
               return null;
             })}
-        </section>
+        </div>
       </div>
-    </main>
+    </div>
   );
 };
-
+{/* <div className="hero bg-base-200 min-h-screen">
+  <div >
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+      className="max-w-sm rounded-lg shadow-2xl"
+    />
+    <div>
+      <h1 className="text-5xl font-bold">Box Office News!</h1>
+      <p className="py-6">
+        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      </p>
+      <button className="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div> */}
 export default AboutPage;
