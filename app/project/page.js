@@ -1,7 +1,8 @@
 import React from 'react'
+import Image from "next/image";
 
 async function getProjects() {
-  const res = await fetch("http://localhost:1337/api/projects?populate=photo", {
+  const res = await fetch("https://thankful-action-da48caefa8.strapiapp.com/api/projects?populate=photo", {
     cache: "no-store",
   })
   return res.json()
@@ -16,14 +17,15 @@ const Project = async () => {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {data.map((project) => {
           const photoUrl = project?.photo?.url
-            ? `http://localhost:1337${project.photo.url}`
+            ? `${project.photo.url}`
             : "https://placehold.co/600x400?text=No+Image"
           return (
             <div key={project.id} className="card bg-base-100 shadow-xl">
               <figure>
-                <img
+                <Image
                   src={photoUrl}
                   alt={project.photo?.alternativeText || project.name}
+                  width={600} height={200}
                   className="object-cover max-w-2xl h-80"
                 />
               </figure>

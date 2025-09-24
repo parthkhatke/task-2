@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import Image from "next/image";
 
-const data = await fetch("http://localhost:1337/api/about?populate[blocks][populate]=*", { cache: 'no-store' });
+const data = await fetch("https://thankful-action-da48caefa8.strapiapp.com/api/about?populate[blocks][populate]=*", { cache: 'no-store' });
 const res = await data.json();
 const AboutPage = () => {
   const content = res?.data ?? null;
@@ -21,8 +22,9 @@ const AboutPage = () => {
     <div className="hero  ">
       <div className="hero-content flex-col lg:flex-row">
    
-          <img
-            src={`http://localhost:1337${mediaBlock.file.url}`}
+          <Image
+            width={400} height={400}
+            src={`${mediaBlock.file.url}`}
             alt={mediaBlock.file.alternativeText || 'Media'}
             className="max-w-sm rounded-lg shadow-2xl"
           />
